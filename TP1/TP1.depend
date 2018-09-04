@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1536068463 source:c:\users\candia family\desktop\nicolas\utn\tps\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"TP1.h"
+
+1536074623 c:\users\candia family\desktop\nicolas\utn\tps\tp1\tp1.h
+
+1536074594 source:c:\users\candia family\desktop\nicolas\utn\tps\tp1\tp1.c
+	<stdio.h>
+	<stdlib.h>
+	"TP1.h"
+
