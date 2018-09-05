@@ -12,17 +12,17 @@ int main()
     float division;
     int factorialNumerouno;
     int factorialNumerodos;
-    int opcion;
+    float opcion;
 
     do
         {
             TP1_menu(&numeroUno,&numeroDos);
-            while(scanf("%d",&opcion)==0 ||(opcion<1 ||opcion>5))
+            while(scanf("%f",&opcion)==0 ||(opcion<1 ||opcion>5) || TP1_verificarNumeroentero(&opcion)==-1)
                 {
                 fflush(stdin);
                 printf("\n error, ingrese opcion entre 1 y 5\n");
                 }
-            switch(opcion)
+            switch((int)opcion)
             {
                 case 1:
                 printf("\n ingrese primer operando:\n");
@@ -41,7 +41,6 @@ int main()
                 TP1_dividirDosnumeros(&numeroUno,&numeroDos,&division);
                 TP1_obtenerFactorialdeunNumero(&numeroUno,&factorialNumerouno);
                 TP1_obtenerFactorialdeunNumero(&numeroDos,&factorialNumerodos);
-
                 break;
 
                 case 4:

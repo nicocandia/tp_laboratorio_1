@@ -2,13 +2,9 @@
 #include <stdlib.h>
 #include "TP1.h"
 /**
-    la funcion TP1_verificarNumeropositivoOigualcero recibe como argumento un float con *pnumero como puntero y
-    calcula si un numero es positivo mayor o igaul a cero, retorna un 0 si lo es y un -1 si no lo es */
+la funcion TP1_verificarNumeropositivoOigualcero recibe como argumento un float con *pnumero como puntero y
+calcula si un numero es positivo mayor o igaul a cero, retorna un 0 si lo es y un -1 si no lo es */
 static int TP1_verificarNumeropositivoOigualcero(float *pnumero);
-/**
-    la funcion TP1_verificarNumeroentero recibe como argumento un float con *pnumero como puntero y
-    calcula si un numero es entero, retorna un 0 si lo es y un -1 si no lo es */
-static int TP1_verificarNumeroentero(float *pnumero);
 
 void TP1_menu(float *pnumeroUno,float *pnumeroDos)
 {
@@ -127,7 +123,8 @@ static int TP1_verificarNumeropositivoOigualcero(float *pnumero)
         }
     return retorno;
 }
- static int TP1_verificarNumeroentero(float *pnumero)
+
+int TP1_verificarNumeroentero(float *pnumero)
 {
     int retorno;
     float auxiliar;
@@ -147,6 +144,8 @@ static int TP1_verificarNumeropositivoOigualcero(float *pnumero)
         }
     return retorno;
 }
+
+
 
 
 

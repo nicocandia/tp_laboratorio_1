@@ -41,4 +41,9 @@ la funcion TP1_cargarNumero tiene como argumento un float con *pnumero como punt
 y verifica que sea realmente un numero, luego retorna ese valor
 */
 float TP1_cargarNumero(float *pnumero);
+
+/**
+la funcion TP1_verificarNumeroentero recibe como argumento un float con *pnumero como puntero y
+calcula si un numero es entero, retorna un 0 si lo es y un -1 si no lo es */
+int TP1_verificarNumeroentero(float *pnumero);
 #endif // TP1_H_INCLUDED
