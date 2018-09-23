@@ -21,6 +21,7 @@ int main()
     Empleado empleados[CANTIDAD_EMPLEADOS];
     inicializarEmpleados(empleados,CANTIDAD_EMPLEADOS);
 
+    printf("\n <<<<<<BIENVENIDO>>>>>>\n");
     do
         {
             if(utn_getInt(&opcion,"\n1-ALTAS\n \n2-MODIFICAR\n \n3-BAJA\n \n4-INFORMAR\n \n5-SALIR\n","\nerror ingrese opcion valida",1,5,3)==0)
