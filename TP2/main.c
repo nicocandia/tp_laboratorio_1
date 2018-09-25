@@ -75,6 +75,7 @@ int main()
                                                     printf("\nEl id no existe");
                                                 }
                                         }
+                                        else{printf("\nError,no se registro bien id\n");}
                                     }
                                 break;
 
@@ -104,7 +105,10 @@ int main()
                                                 {
                                                     printf("\nEl id no existe\n");
                                                 }
-                                           }}
+                                           }
+                                           else
+                                            {printf("\nError,no se registro bien id\n");}
+                                           }
                             break;
 
                         case 4:
