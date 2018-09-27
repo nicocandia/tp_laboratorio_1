@@ -253,18 +253,22 @@ static int isLetras(char*pBuffer)
     return retorno;
 }
 
-void imprimirEmpleados(Empleado *empleado,int tamanio)
+int imprimirEmpleados(Empleado *empleado,int tamanio)
 {
     int i;
-    printf("APELLIDO:\t NOMBRE:\t SALARIO:\t SECTOR:\t ID:\t ESTAVACIO:\t\n");
+    int retorno=-1;
+    printf("\nAPELLIDO:\t NOMBRE:\t SALARIO:\t SECTOR:\t ID:\t ESTAVACIO:\t\n");
+
     for(i=0;i<tamanio;i++)
         {
             if(empleado[i].estaVacio==FALSE)
             {
-            printf("%s\t %s\t %f\t %d\t %d\t %d\t\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
-            //printf("\nAPELLIDO:%s     SECTOR:%d\n",empleado[i].apellido,empleado[i].sector);
+            printf("\n%s\t \t%s \t%.2f\t \t%d\t \t%d\t \t%d\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
+            retorno=0;
             }
             }
+
+    return retorno;
 }
 int agregarEmpleado(Empleado*empleado,int indice,int tamanio)
 {
@@ -358,15 +362,19 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                             if(utn_getLetras(apellidoAuxiliar,51,3,"\nIngrese nuevo apellido\n","\nError\n")==0)
                                 {
                                     strncpy(empleado[indice].apellido,apellidoAuxiliar,51);
-                                    retorno=0;
+                                    retorno=1;
                                 }
                             break;
 
                         case 3:
                             if(utn_getFloat(&salarioAuxiliar,"\nIngrese nuevo salario\n","\nError salario no valido\n",0,80000,3)==0)
                                 {
-                                    empleado[indice].salario=salarioAuxiliar;
-                                    retorno=0;
+                                    if(verificarSiseModifico_salarioEmpleado(empleado,salarioAuxiliar,indice)==0)
+                                        {
+                                           empleado[indice].salario=salarioAuxiliar;
+                                           retorno=2;
+                                        }
+
                                 }
                             break;
 
@@ -374,7 +382,8 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                             if(utn_getInt(&sectorAuxiliar,"\nIngrese nuevo sector\n","\nError sector no valido",1,1000,3)==0)
                                 {
                                     empleado[indice].sector=sectorAuxiliar;
-                                    retorno=0;
+
+                                    retorno=3;
                                 }
                             break;
 
@@ -385,7 +394,7 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
      return retorno;
  }
 
- void ordenarArregloporApellidoySector(Empleado*empleado,int tamanio,int orden)
+ int ordenarArregloporApellidoySector(Empleado*empleado,int tamanio,int orden)
  {
      char apellidoAuxiliar[51];
      char nombreAuxiliar[51];
@@ -393,8 +402,10 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
      int sectorAuxiliar;
      int idAuxiliar;
      int i;
+     int retorno=-1;
      int flagterminedeOrdenar=1;
-     while(flagterminedeOrdenar==1)
+
+        while(flagterminedeOrdenar==1)
         {
             flagterminedeOrdenar=0;
             for(i=0;i<tamanio-1;i++)
@@ -425,7 +436,9 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                     empleado[i+1].id=idAuxiliar;
 
                     flagterminedeOrdenar=1;
+                    retorno=0;
                    }
+
                 if(stricmp(empleado[i].apellido,empleado[i+1].apellido)==0)
                    {
                         if((orden==1 && empleado[i].sector>empleado[i+1].sector) || (orden==0 && empleado[i].sector<empleado[i+1].sector) )
@@ -451,12 +464,21 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                                 empleado[i+1].id=idAuxiliar;
 
                                 flagterminedeOrdenar=1;
+                                retorno=0;
                             }
                    }
-                   }
             }
+            else
+                if(empleado[i].estaVacio==FALSE)
+                    {
+                        retorno=0;
+                    }
         }
- }
+        }
+
+return retorno;
+}
+
 
  int empleadosqueSuperanSalarioPromedio(Empleado*empleado,int tamanio,int promedioSalario)
  {
@@ -472,3 +494,13 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
         }
  return CantidadEmpleadossuperanSalariopromedio;
  }
+
+int verificarSiseModifico_salarioEmpleado(Empleado*empleado,int salario,int indice)
+{
+    int retorno=-1;
+    if(empleado[indice].salario!=salario || empleado[indice].salario==salario)
+        {
+            retorno=0;
+        }
+    return retorno;
+}

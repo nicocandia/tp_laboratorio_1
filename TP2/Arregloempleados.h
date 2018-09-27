@@ -47,7 +47,7 @@ int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjErro
 
 int agregarEmpleado(Empleado*empleado,int indice,int tamanio);
 
-void imprimirEmpleados(Empleado *empleado,int tamanio);
+int imprimirEmpleados(Empleado *empleado,int tamanio);
 
 int verificarQuesecargoAlmenosUnempleado(Empleado*empleado,int tamanio);
 
@@ -55,8 +55,10 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio);
 
 int modificarEmpleado(Empleado*empleado,int tamanio,int indice);
 
-void ordenarArregloporApellidoySector(Empleado*empleado,int tamanio,int orden);
+int ordenarArregloporApellidoySector(Empleado*empleado,int tamanio,int orden);
 
 int empleadosqueSuperanSalarioPromedio(Empleado*empleado,int tamanio,int promedioSalario);
+
+int verificarSiseModifico_salarioEmpleado(Empleado*empleado,int salario,int indice);
 
 #endif // ARREGLOEMPLEADOS_H_INCLUDED

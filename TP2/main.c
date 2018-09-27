@@ -17,6 +17,7 @@ int main()
     int acumuladorEmpleados=0;
     int CantidadEmpleadossuperanSalariopromedio;
     float acumuladorSalarios=0;
+    float arregloSalarios[100];
 
     Empleado empleados[CANTIDAD_EMPLEADOS];
     inicializarEmpleados(empleados,CANTIDAD_EMPLEADOS);
@@ -24,7 +25,7 @@ int main()
     printf("\n <<<<<<BIENVENIDO>>>>>>\n");
     do
         {
-            if(utn_getInt(&opcion,"\n1-ALTAS\n \n2-MODIFICAR\n \n3-BAJA\n \n4-INFORMAR\n \n5-SALIR\n","\nerror ingrese opcion valida",1,5,3)==0)
+            if(utn_getInt(&opcion,"\n1-ALTAS\n \n2-MODIFICAR\n \n3-BAJA\n \n4-INFORMAR\n \n5-SALIR\n\nOPCION:???\n","\nerror ingrese opcion valida",1,5,3)==0)
                 {
                     switch(opcion)
                     {
@@ -36,7 +37,10 @@ int main()
                                         {
                                             printf("\nAlta exitosa!!\n");
                                             acumuladorSalarios=acumuladorSalarios+empleados[indice].salario;
+                                            arregloSalarios[indice]=empleados[indice].salario;
                                             acumuladorEmpleados++;
+                                            printf("\nacumulador salario; %f",acumuladorSalarios);
+                                            printf("\nel lugar donde esta salarioauxiliar es:%d",indice);
                                         }
                                         else
                                             {
@@ -56,19 +60,37 @@ int main()
                                 }
                                 else
                                     {
-                                        if(utn_getInt(&id,"\nIngrese id del empleado a dar de baja\n","\nerror id no valido\n",0,999,3)==0)
+                                        if(utn_getInt(&id,"\nIngrese id del empleado a modificar\n","\nerror id no valido\n",0,999,3)==0)
                                         {
                                             indice=buscarEmpleadoporid(empleados,CANTIDAD_EMPLEADOS,id);
                                             if(indice>=0)
                                                 {
-                                                    if(modificarEmpleado(empleados,CANTIDAD_EMPLEADOS,indice)==0)
-                                                        {
-                                                            printf("\nSe han modificado los datos del empleado\n");
-                                                        }
-                                                        else
-                                                        {
-                                                            printf("\nError,no se pudo modificar los datos del empleado\n");
-                                                        }
+                                                   switch(modificarEmpleado(empleados,CANTIDAD_EMPLEADOS,indice))
+                                                   {
+                                                    case 0:
+                                                        printf("\nSe ha modificado el nombre del empleado\n");
+                                                        break;
+
+                                                     case 1:
+                                                        printf("\nSe ha modificado el apellido del empleado\n");
+                                                        break;
+
+                                                    case 2:
+                                                        printf("\nSe ha modificado el salario del empleado\n");
+                                                        acumuladorSalarios=(acumuladorSalarios-arregloSalarios[indice])+empleados[indice].salario;
+                                                        arregloSalarios[indice]=empleados[indice].salario;
+                                                        printf("\narreglosalario:%f en la posicion:%d\n",arregloSalarios[indice],indice);
+                                                        printf("\nacumulador salario; %f",acumuladorSalarios);
+
+                                                        break;
+
+                                                    case 3:
+                                                        printf("\nSe ha modificado el sector del empleado\n");
+                                                        break;
+
+                                                    default:
+                                                        printf("\nNo se han podido modificar los datos del empleado\n");
+                                                   }
                                                 }
                                                 else
                                                 {
@@ -93,6 +115,8 @@ int main()
                                                 {
                                                     if(eliminarEmpleado(empleados,id,CANTIDAD_EMPLEADOS)==0)
                                                         {
+                                                            acumuladorSalarios=(acumuladorSalarios-empleados[indice].salario);
+                                                            acumuladorEmpleados--;
                                                             printf("\nSe ha dado de baja el empleado\n");
                                                         }
                                                         else
@@ -112,19 +136,20 @@ int main()
                             break;
 
                         case 4:
-                            if(verificarQuesecargoAlmenosUnempleado(empleados,CANTIDAD_EMPLEADOS)==-1)
-                                {
-                                    printf("\n error no hay empleados registrados!!\n");
-                                }
-                                else
+                                   if(ordenarArregloporApellidoySector(empleados,CANTIDAD_EMPLEADOS,1)==0)
                                     {
-                                        totalSalarios=acumuladorSalarios;
-                                        promedioSalarios=(int)totalSalarios/acumuladorEmpleados;
-                                        CantidadEmpleadossuperanSalariopromedio=empleadosqueSuperanSalarioPromedio(empleados,CANTIDAD_EMPLEADOS,promedioSalarios);
-                                        printf("\nTOTAL SALARIOS:%.2f  PROMEDIO SALARIO:%d  EMPLEADOS QUE SUPERAN EL PROMEDIO DE SALARIO:%d\n",totalSalarios,promedioSalarios,CantidadEmpleadossuperanSalariopromedio);
-                                        ordenarArregloporApellidoySector(empleados,CANTIDAD_EMPLEADOS,ORDEN);
-                                        imprimirEmpleados(empleados,CANTIDAD_EMPLEADOS);
+                                        if(imprimirEmpleados(empleados,CANTIDAD_EMPLEADOS)==0)
+                                        {   printf("\nAcumulador salarios: %fn",acumuladorSalarios);
+                                            totalSalarios=acumuladorSalarios;
+                                            promedioSalarios=(int)totalSalarios/acumuladorEmpleados;
+                                            CantidadEmpleadossuperanSalariopromedio=empleadosqueSuperanSalarioPromedio(empleados,CANTIDAD_EMPLEADOS,promedioSalarios);
+                                            printf("\nTOTAL SALARIOS:%.2f  PROMEDIO SALARIO:%d  EMPLEADOS QUE SUPERAN EL PROMEDIO DE SALARIO:%d\n",totalSalarios,promedioSalarios,CantidadEmpleadossuperanSalariopromedio);
+                                        }
                                     }
+                                    else
+                                       {
+                                           printf("\nNo hay empleados registrados\n");
+                                       }
                             break;
 
                     }
