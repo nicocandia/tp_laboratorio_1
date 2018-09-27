@@ -134,7 +134,7 @@ int main()
                                    if(ordenarArregloporApellidoySector(empleados,CANTIDAD_EMPLEADOS,1)==0)
                                     {
                                         if(imprimirEmpleados(empleados,CANTIDAD_EMPLEADOS)==0)
-                                        {   printf("\nAcumulador salarios: %fn",acumuladorSalarios);
+                                        {
                                             totalSalarios=acumuladorSalarios;
                                             promedioSalarios=(int)totalSalarios/acumuladorEmpleados;
                                             CantidadEmpleadossuperanSalariopromedio=empleadosqueSuperanSalarioPromedio(empleados,CANTIDAD_EMPLEADOS,promedioSalarios);
