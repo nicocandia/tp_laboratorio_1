@@ -256,11 +256,12 @@ static int isLetras(char*pBuffer)
 void imprimirEmpleados(Empleado *empleado,int tamanio)
 {
     int i;
+    printf("APELLIDO:\t NOMBRE:\t SALARIO:\t SECTOR:\t ID:\t ESTAVACIO:\t\n");
     for(i=0;i<tamanio;i++)
         {
             if(empleado[i].estaVacio==FALSE)
             {
-            printf("\nAPELLIDO:%s             NOMBRE:%s        SALARIO:%.2f        SECTOR:%d        ID:%d        ESTAVACIO:%d\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
+            printf("%s\t %s\t %f\t %d\t %d\t %d\t\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
             //printf("\nAPELLIDO:%s     SECTOR:%d\n",empleado[i].apellido,empleado[i].sector);
             }
             }
