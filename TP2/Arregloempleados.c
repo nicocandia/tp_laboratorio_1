@@ -257,13 +257,13 @@ int imprimirEmpleados(Empleado *empleado,int tamanio)
 {
     int i;
     int retorno=-1;
-    printf("\nAPELLIDO:\t NOMBRE:\t SALARIO:\t SECTOR:\t ID:\t ESTAVACIO:\t\n");
+    printf("\nAPELLIDO:\tNOMBRE:\t\tSALARIO:\tSECTOR:\t\tID:\t\tESTAVACIO:\n");
 
     for(i=0;i<tamanio;i++)
         {
             if(empleado[i].estaVacio==FALSE)
             {
-            printf("\n%s\t \t%s \t%.2f\t \t%d\t \t%d\t \t%d\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
+            printf("\n%s\t\t%s\t\t%.2f\t\t%d\t\t%d\t\t%d\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
             retorno=0;
             }
             }
@@ -412,7 +412,7 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
             {
                 if((empleado[i].estaVacio==FALSE) && (empleado[i+1].estaVacio==FALSE))
                 {
-                if((orden==1 && stricmp(empleado[i].apellido,empleado[i+1].apellido)==1)   || (orden==0 && stricmp(empleado[i].apellido,empleado[i+1].apellido)==-1))
+                if((orden==1 && strcmp(empleado[i].apellido,empleado[i+1].apellido)==1)   || (orden==0 && strcmp(empleado[i].apellido,empleado[i+1].apellido)==-1))
                    {
 
                     strncpy(apellidoAuxiliar,empleado[i].apellido,51);
@@ -439,7 +439,7 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                     retorno=0;
                    }
 
-                if(stricmp(empleado[i].apellido,empleado[i+1].apellido)==0)
+                if(strcmp(empleado[i].apellido,empleado[i+1].apellido)==0)
                    {
                         if((orden==1 && empleado[i].sector>empleado[i+1].sector) || (orden==0 && empleado[i].sector<empleado[i+1].sector) )
                             {
