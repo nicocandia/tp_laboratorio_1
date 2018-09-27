@@ -39,8 +39,6 @@ int main()
                                             acumuladorSalarios=acumuladorSalarios+empleados[indice].salario;
                                             arregloSalarios[indice]=empleados[indice].salario;
                                             acumuladorEmpleados++;
-                                            printf("\nacumulador salario; %f",acumuladorSalarios);
-                                            printf("\nel lugar donde esta salarioauxiliar es:%d",indice);
                                         }
                                         else
                                             {
@@ -79,9 +77,6 @@ int main()
                                                         printf("\nSe ha modificado el salario del empleado\n");
                                                         acumuladorSalarios=(acumuladorSalarios-arregloSalarios[indice])+empleados[indice].salario;
                                                         arregloSalarios[indice]=empleados[indice].salario;
-                                                        printf("\narreglosalario:%f en la posicion:%d\n",arregloSalarios[indice],indice);
-                                                        printf("\nacumulador salario; %f",acumuladorSalarios);
-
                                                         break;
 
                                                     case 3:
