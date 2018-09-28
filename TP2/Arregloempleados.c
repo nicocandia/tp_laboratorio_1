@@ -257,13 +257,13 @@ int imprimirEmpleados(Empleado *empleado,int tamanio)
 {
     int i;
     int retorno=-1;
-    printf("\nAPELLIDO:\tNOMBRE:\t\tSALARIO:\tSECTOR:\t\tID:\t\tESTAVACIO:\n");
+    printf("\nAPELLIDO:\t\tNOMBRE:\t\tSALARIO:\t\tSECTOR:\t\tID:\t\tESTAVACIO:\n");
 
     for(i=0;i<tamanio;i++)
         {
             if(empleado[i].estaVacio==FALSE)
             {
-            printf("\n%s\t\t%s\t\t%.2f\t\t%d\t\t%d\t\t%d\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
+            printf("\n%s\t\t\t%s\t\t%.2f\t\t%d\t\t%d\t\t%d\n",empleado[i].apellido,empleado[i].nombre,empleado[i].salario,empleado[i].sector,empleado[i].id,empleado[i].estaVacio);
             retorno=0;
             }
             }
@@ -284,9 +284,9 @@ int agregarEmpleado(Empleado*empleado,int indice,int tamanio)
         {
             if(utn_getLetras(apellidoAuxiliar,51,3,"\ningrese apellido del empleado:\n","\n error\n")==0)
                 {
-                    if(utn_getInt(&sectorAuxiliar,"\ningrese sector del empleado:\n","\nerror\n",1,1000,3)==0)
+                    if(utn_getInt(&sectorAuxiliar,"\ningrese sector del empleado:\n","\nerror,ingrese numero entre 1 y 10\n",1,10,3)==0)
                     {
-                        if(utn_getFloat(&salarioAuxiliar,"\ningrese salario del empleado\n","\nerror\n",0,80000,3)==0)
+                        if(utn_getFloat(&salarioAuxiliar,"\ningrese salario del empleado\n","\nerror, salario minimo 10000 y maximo 80000\n",10000,80000,3)==0)
                             {
                                 strncpy(empleado[indice].nombre,nombreAuxiliar,51);
                                 strncpy(empleado[indice].apellido,apellidoAuxiliar,51);
@@ -367,7 +367,7 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                             break;
 
                         case 3:
-                            if(utn_getFloat(&salarioAuxiliar,"\nIngrese nuevo salario\n","\nError salario no valido\n",0,80000,3)==0)
+                            if(utn_getFloat(&salarioAuxiliar,"\nIngrese nuevo salario\n","\nError salario minimo 10000 y maximo 80000\n",10000,80000,3)==0)
                                 {
                                     if(verificarSiseModifico_salarioEmpleado(empleado,salarioAuxiliar,indice)==0)
                                         {
@@ -379,7 +379,7 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                             break;
 
                         case 4:
-                            if(utn_getInt(&sectorAuxiliar,"\nIngrese nuevo sector\n","\nError sector no valido",1,1000,3)==0)
+                            if(utn_getInt(&sectorAuxiliar,"\nIngrese nuevo sector\n","\nError, sector debe estar entre 1 y 10",1,10,3)==0)
                                 {
                                     empleado[indice].sector=sectorAuxiliar;
 
