@@ -286,7 +286,7 @@ int agregarEmpleado(Empleado*empleado,int indice,int tamanio)
                 {
                     if(utn_getInt(&sectorAuxiliar,"\ningrese sector del empleado:\n","\nerror,ingrese numero entre 1 y 10\n",1,10,3)==0)
                     {
-                        if(utn_getFloat(&salarioAuxiliar,"\ningrese salario del empleado\n","\nerror, salario minimo 10000 y maximo 80000\n",10000,80000,3)==0)
+                        if(utn_getFloat(&salarioAuxiliar,"\ningrese salario del empleado\n","\nerror, salario minimo 10000 y maximo 80000 y tiene que ir con coma\n",10000,80000,3)==0)
                             {
                                 strncpy(empleado[indice].nombre,nombreAuxiliar,51);
                                 strncpy(empleado[indice].apellido,apellidoAuxiliar,51);
@@ -367,7 +367,7 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                             break;
 
                         case 3:
-                            if(utn_getFloat(&salarioAuxiliar,"\nIngrese nuevo salario\n","\nError salario minimo 10000 y maximo 80000\n",10000,80000,3)==0)
+                            if(utn_getFloat(&salarioAuxiliar,"\nIngrese nuevo salario\n","\nError salario minimo 10000 y maximo 80000 y tiene que ir con coma\n",10000,80000,3)==0)
                                 {
                                     if(verificarSiseModifico_salarioEmpleado(empleado,salarioAuxiliar,indice)==0)
                                         {
