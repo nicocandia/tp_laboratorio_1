@@ -280,28 +280,24 @@ int agregarEmpleado(Empleado*empleado,int indice,int tamanio)
 
         if(indice>=0 && indice<tamanio)
         {
-        if(utn_getLetras(nombreAuxiliar,51,3,"\ningrese nombre del empleado:\n","\nerror\n")==0)
-        {
-            if(utn_getLetras(apellidoAuxiliar,51,3,"\ningrese apellido del empleado:\n","\n error\n")==0)
+        if(utn_getLetras(nombreAuxiliar,51,3,"\ningrese nombre del empleado:\n","\nerror\n")==0
+           &&(utn_getLetras(apellidoAuxiliar,51,3,"\ningrese apellido del empleado:\n","\n error\n")==0)
+           &&(utn_getInt(&sectorAuxiliar,"\ningrese sector del empleado:\n","\nerror,ingrese numero entre 1 y 10\n",1,10,3)==0)
+           &&(utn_getFloat(&salarioAuxiliar,"\ningrese salario del empleado\n","\nerror, salario minimo 10000 y maximo 80000 y tiene que ir con coma\n",10000,80000,3)==0))
                 {
-                    if(utn_getInt(&sectorAuxiliar,"\ningrese sector del empleado:\n","\nerror,ingrese numero entre 1 y 10\n",1,10,3)==0)
-                    {
-                        if(utn_getFloat(&salarioAuxiliar,"\ningrese salario del empleado\n","\nerror, salario minimo 10000 y maximo 80000 y tiene que ir con coma\n",10000,80000,3)==0)
-                            {
-                                strncpy(empleado[indice].nombre,nombreAuxiliar,51);
-                                strncpy(empleado[indice].apellido,apellidoAuxiliar,51);
-                                empleado[indice].sector=sectorAuxiliar;
-                                empleado[indice].salario=salarioAuxiliar,
-                                empleado[indice].id=generarID();
-                                empleado[indice].estaVacio=FALSE;
-                                retorno=0;
-                            }
-                    }
+                    strncpy(empleado[indice].nombre,nombreAuxiliar,51);
+                    strncpy(empleado[indice].apellido,apellidoAuxiliar,51);
+                    empleado[indice].sector=sectorAuxiliar;
+                    empleado[indice].salario=salarioAuxiliar,
+                    empleado[indice].id=generarID();
+                    empleado[indice].estaVacio=FALSE;
+                    retorno=0;
                 }
-        }
-        }
+            }
     return retorno;
+
 }
+
 int verificarQuesecargoAlmenosUnempleado(Empleado*empleado,int tamanio)
 {
     int i;
@@ -396,14 +392,10 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
 
  int ordenarArregloporApellidoySector(Empleado*empleado,int tamanio,int orden)
  {
-     char apellidoAuxiliar[51];
-     char nombreAuxiliar[51];
-     float salarioAuxiliar;
-     int sectorAuxiliar;
-     int idAuxiliar;
      int i;
      int retorno=-1;
      int flagterminedeOrdenar=1;
+     Empleado empleadoAuxiliar;
 
         while(flagterminedeOrdenar==1)
         {
@@ -415,66 +407,34 @@ int eliminarEmpleado(Empleado*empleado,int id,int tamanio)
                 if((orden==1 && strcmp(empleado[i].apellido,empleado[i+1].apellido)==1)   || (orden==0 && strcmp(empleado[i].apellido,empleado[i+1].apellido)==-1))
                    {
 
-                    strncpy(apellidoAuxiliar,empleado[i].apellido,51);
-                    strncpy(empleado[i].apellido,empleado[i+1].apellido,51);
-                    strncpy(empleado[i+1].apellido,apellidoAuxiliar,51);
-
-                    strncpy(nombreAuxiliar,empleado[i].nombre,51);
-                    strncpy(empleado[i].nombre,empleado[i+1].nombre,51);
-                    strncpy(empleado[i+1].nombre,nombreAuxiliar,51);
-
-                    salarioAuxiliar=empleado[i].salario;
-                    empleado[i].salario=empleado[i+1].salario;
-                    empleado[i+1].salario=salarioAuxiliar;
-
-                    sectorAuxiliar=empleado[i].sector;
-                    empleado[i].sector=empleado[i+1].sector;
-                    empleado[i+1].sector=sectorAuxiliar;
-
-                    idAuxiliar=empleado[i].id;
-                    empleado[i].id=empleado[i+1].id;
-                    empleado[i+1].id=idAuxiliar;
+                    empleadoAuxiliar=empleado[i];
+                    empleado[i]=empleado[i+1];
+                    empleado[i+1]=empleadoAuxiliar;
 
                     flagterminedeOrdenar=1;
                     retorno=0;
                    }
 
-                if(strcmp(empleado[i].apellido,empleado[i+1].apellido)==0)
-                   {
-                        if((orden==1 && empleado[i].sector>empleado[i+1].sector) || (orden==0 && empleado[i].sector<empleado[i+1].sector) )
+                if(strcmp(empleado[i].apellido,empleado[i+1].apellido)==0
+                   &&((orden==1 && empleado[i].sector>empleado[i+1].sector) || (orden==0 && empleado[i].sector<empleado[i+1].sector)))
                             {
-                                sectorAuxiliar=empleado[i].sector;
-                                empleado[i].sector=empleado[i+1].sector;
-                                empleado[i+1].sector=sectorAuxiliar;
-
-                                strncpy(apellidoAuxiliar,empleado[i].apellido,51);
-                                strncpy(empleado[i].apellido,empleado[i+1].apellido,51);
-                                strncpy(empleado[i+1].apellido,apellidoAuxiliar,51);
-
-                                strncpy(nombreAuxiliar,empleado[i].nombre,51);
-                                strncpy(empleado[i].nombre,empleado[i+1].nombre,51);
-                                strncpy(empleado[i+1].nombre,nombreAuxiliar,51);
-
-                                salarioAuxiliar=empleado[i].salario;
-                                empleado[i].salario=empleado[i+1].salario;
-                                empleado[i+1].salario=salarioAuxiliar;
-
-                                idAuxiliar=empleado[i].id;
-                                empleado[i].id=empleado[i+1].id;
-                                empleado[i+1].id=idAuxiliar;
+                                empleadoAuxiliar=empleado[i];
+                                empleado[i]=empleado[i+1];
+                                empleado[i+1]=empleadoAuxiliar;
 
                                 flagterminedeOrdenar=1;
                                 retorno=0;
                             }
                    }
+                    else
+                        if(empleado[i].estaVacio==FALSE)
+                        {
+                            retorno=0;
+                        }
             }
-            else
-                if(empleado[i].estaVacio==FALSE)
-                    {
-                        retorno=0;
-                    }
+
         }
-        }
+
 
 return retorno;
 }
