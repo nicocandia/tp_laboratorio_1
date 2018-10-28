@@ -35,6 +35,7 @@ int main()
                     {
                         printf("\nSe cargaron los datos de los empleados correctamente\n");
                     }
+                    else{printf("\nno se cargaron los datos de los empleados correctamente\n");}
                 break;
 
                 case 2:
@@ -79,9 +80,15 @@ int main()
                         {
                             printf("\nse ha ordenado la lista de empleados\n");
                         }
+                        else{printf("\nno hay empleados cargados a ordenar\n");}
                     break;
 
                 case 8:
+                    if(!controller_saveAsText("backupData",listaEmpleados))
+                        {
+                            printf("\nse guardaron los datos\n");
+                        }
+                        else{printf("\nno se guardaron los datos\n");}
                     break;
                 case 9:
                     break;

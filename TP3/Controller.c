@@ -172,6 +172,10 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     int retorno=-1;
     int i;
     int len=ll_len(pArrayListEmployee);
+    int idAuxiliar;
+    char nombreAuxiliar[128];
+    int horasAuxiliar;
+    int sueldoAuxiliar;
     Employee*pEmployeeAuxiliar;
 
     if(pArrayListEmployee!=NULL)
@@ -181,7 +185,12 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
                     pEmployeeAuxiliar=(Employee*)ll_get(pArrayListEmployee,i);
                     if(pEmployeeAuxiliar!=NULL)
                         {
-                            printf("\n%d -- %s -- %d -- %d\n",pEmployeeAuxiliar->id,pEmployeeAuxiliar->nombre,pEmployeeAuxiliar->horasTrabajadas,pEmployeeAuxiliar->sueldo);
+                            Employee_getId(pEmployeeAuxiliar,&idAuxiliar);
+                            Employee_getNombre(pEmployeeAuxiliar,nombreAuxiliar);
+                            Employee_getHorasTrabajadas(pEmployeeAuxiliar,&horasAuxiliar);
+                            Employee_getSueldo(pEmployeeAuxiliar,&sueldoAuxiliar);
+
+                            printf("\n%d -- %s -- %d -- %d\n",idAuxiliar,nombreAuxiliar,horasAuxiliar,sueldoAuxiliar);
                             retorno=0;
                         }
                 }
@@ -244,7 +253,34 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno=-1;
+    int i;
+    int len=ll_len(pArrayListEmployee);
+    FILE*pArchivo;
+    pArchivo=fopen(path,"w");
+    Employee*pEmployeeAuxiliar;
+    int idAuxiliar;
+    char nombreAuxiliar[128];
+    int horasAuxiliar;
+    int sueldoAuxiliar;
+
+    if(pArchivo!=NULL)
+        {
+            fprintf(pArchivo,"%s","\nLISTA EMPLEADOS\n");
+          for(i=0;i<len;i++)
+            {
+                pEmployeeAuxiliar=(Employee*)ll_get(pArrayListEmployee,i);
+                Employee_getId(pEmployeeAuxiliar,&idAuxiliar);
+                Employee_getNombre(pEmployeeAuxiliar,nombreAuxiliar);
+                Employee_getHorasTrabajadas(pEmployeeAuxiliar,&horasAuxiliar);
+                Employee_getSueldo(pEmployeeAuxiliar,&sueldoAuxiliar);
+
+                fprintf(pArchivo,"\n%d,%s,%d,%d\n",idAuxiliar,nombreAuxiliar,horasAuxiliar,sueldoAuxiliar);
+                retorno=0;
+            }
+        }
+        fclose(pArchivo);
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
