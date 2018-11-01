@@ -50,7 +50,6 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 
 /** \brief Alta de empleados
  *
- * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
  *
@@ -90,7 +89,6 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Modificar datos de empleado
  *
- * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
  *
@@ -145,7 +143,6 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Baja de empleado
  *
- * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
  *
@@ -169,8 +166,6 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 }
 
 /** \brief Listar empleados
- *
- * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
  *
@@ -209,21 +204,15 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
 
 /** \brief Ordenar empleados
  *
- * \param path char*
  * \param pArrayListEmployee LinkedList*
  * \return int
  *
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    int opcion=0;
-    int retorno=-1;
-    if(!utn_getInt(&opcion,"\nIngrese 1 para ordenar por nombre ascendente\n\nIngrese -1 para ordenar por nombre descendente\n","\nerror,opcion invalida\n",-1,1,3)&& opcion!=0)
-        {
-            ll_sort(pArrayListEmployee,employee_Compare,opcion);
-            retorno=0;
-        }
-    return retorno;
+    ll_sort(pArrayListEmployee,employee_Compare,1);
+
+    return 0;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
@@ -292,6 +281,12 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     return retorno;
 }
 
+/** \brief busca empleado por numero id
+ *
+ * \param id int
+ * \param pArray LinkedList*
+ * \return int
+ */
 static int buscarEmployeebyId(LinkedList*array,int id)
 {
     int indice=-1;

@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+/** \brief genera un empleado.
+
+ * \return int
+ *
+ */
 Employee* Employee_new()
 {
     Employee* this;
@@ -11,11 +16,27 @@ Employee* Employee_new()
     return this;
 }
 
+/** \brief elimina empleado.
+ *
+ * \param this Employee*
+ * \param pArrayListEmployee LinkedList*
+ * \return void
+ *
+ */
 void Employee_delete(Employee* this)
 {
     free(this);
 }
 
+/** \brief genera un empleado con parametros a eligir
+ *
+ * \param id int
+ * \param nombre char*
+ * \param horasTrabajadas int
+ * \param sueldo int
+ * \return Employee*
+ *
+ */
 Employee* Employee_newConParametros(int id,char* nombre,int horasTrabajadas,int sueldo)
 {
     Employee*pEmployee=NULL;
@@ -34,6 +55,13 @@ Employee* Employee_newConParametros(int id,char* nombre,int horasTrabajadas,int 
     return pEmployee;
 }
 
+/** \brief setea el id del empleado
+ *
+ * \param id int
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_setId(Employee* this,int id)
 {
     int retorno=-1;
@@ -54,6 +82,14 @@ int Employee_setId(Employee* this,int id)
     return retorno;
 }
 
+/** \brief obtengo el id del empleado
+ *
+ * \param id int*
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
+
 int Employee_getId(Employee* this,int* id)
 {
     int retorno=-1;
@@ -64,7 +100,13 @@ int Employee_getId(Employee* this,int* id)
     }
     return retorno;
 }
-
+/** \brief setea el nombre del empleado
+ *
+ * \param nombre char*
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_setNombre(Employee* this,char* nombre)
 {
     int retorno=-1;
@@ -76,6 +118,13 @@ int Employee_setNombre(Employee* this,char* nombre)
     return retorno;
 }
 
+/** \brief obtengo el nombre del empleado
+ *
+ * \param nombre char*
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_getNombre(Employee* this,char* nombre)
 {
     int retorno=-1;
@@ -87,6 +136,13 @@ int Employee_getNombre(Employee* this,char* nombre)
     return retorno;
 }
 
+/** \brief setea horas trabajadas del empleado
+ *
+ * \param horasTrabajadas int
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int retorno=-1;
@@ -98,6 +154,13 @@ int Employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
     return retorno;
 }
 
+/** \brief obtengo horas trabajadas del empleado
+ *
+ * \param horasTrabajadas int*
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
     int retorno=-1;
@@ -109,6 +172,13 @@ int Employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
     return retorno;
 }
 
+/** \brief setea sueldo del empleado
+ *
+ * \param sueldo int
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_setSueldo(Employee* this,int sueldo)
 {
     int retorno=-1;
@@ -120,6 +190,13 @@ int Employee_setSueldo(Employee* this,int sueldo)
     return retorno;
 }
 
+/** \brief obtengo sueld del empleado
+ *
+ * \param sueldo int*
+ * \param this Employee*
+ * \return int 0 si esta bien -1 sino
+ *
+ */
 int Employee_getSueldo(Employee* this,int* sueldo)
 {
     int retorno=-1;
@@ -130,6 +207,14 @@ int Employee_getSueldo(Employee* this,int* sueldo)
     }
     return retorno;
 }
+
+/** \brief compara nombres de dos empleados
+ *
+ * \param thisA void*
+ * \param thisB void*
+ * \return int 1 si nombre thisA es mayor a nombre thisB sino -1
+ *
+ */
 
 int employee_Compare(void* thisA ,void* thisB)
 {
