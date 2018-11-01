@@ -39,6 +39,12 @@ int main()
                 break;
 
                 case 2:
+                    if(!controller_loadFromBinary("data.bin",listaEmpleados))
+                    {
+                        printf("\nSe cargaron los datos de los empleados correctamente\n");
+                    }
+                    else{printf("\nno se cargaron los datos de los empleados correctamente\n");}
+
                     break;
 
                 case 3:
@@ -84,13 +90,18 @@ int main()
                     break;
 
                 case 8:
-                    if(!controller_saveAsText("backupData",listaEmpleados))
+                    if(!controller_saveAsText("data.csv",listaEmpleados))
                         {
                             printf("\nse guardaron los datos\n");
                         }
                         else{printf("\nno se guardaron los datos\n");}
                     break;
                 case 9:
+                    if(!controller_saveAsBinary("data.bin",listaEmpleados))
+                    {
+                        printf("\nse guardaron los datos\n");
+                    }
+                    else{printf("\nno se guardaron los datos\n");}
                     break;
             }
         }
