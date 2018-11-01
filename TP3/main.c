@@ -39,7 +39,7 @@ int main()
                 break;
 
                 case 2:
-                    if(!controller_loadFromBinary("data.bin",listaEmpleados))
+                    if(!controller_loadFromBinary("data.csv",listaEmpleados))
                     {
                         printf("\nSe cargaron los datos de los empleados correctamente\n");
                     }
@@ -84,9 +84,9 @@ int main()
                 case 7:
                     if(!controller_sortEmployee(listaEmpleados))
                         {
-                            printf("\nse ha ordenado la lista de empleados\n");
+                            printf("\nSe ordenaron los empleados correctamente\n");
                         }
-                        else{printf("\nno hay empleados cargados a ordenar\n");}
+                        else{printf("\nerror, no se pudieron ordenar los empleados\n");}
                     break;
 
                 case 8:
@@ -97,7 +97,7 @@ int main()
                         else{printf("\nno se guardaron los datos\n");}
                     break;
                 case 9:
-                    if(!controller_saveAsBinary("data.bin",listaEmpleados))
+                    if(!controller_saveAsBinary("data.csv",listaEmpleados))
                     {
                         printf("\nse guardaron los datos\n");
                     }

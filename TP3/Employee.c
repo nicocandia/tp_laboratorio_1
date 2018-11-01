@@ -131,4 +131,25 @@ int Employee_getSueldo(Employee* this,int* sueldo)
     return retorno;
 }
 
+int employee_Compare(void* thisA ,void* thisB)
+{
+    int retorno;
+    char NombreThisA[128];
+    char NombreThisB[128];
+
+    Employee_getNombre((Employee*)thisA,NombreThisA);
+    Employee_getNombre((Employee*)thisB,NombreThisB);
+
+    if(strcmp(NombreThisA,NombreThisB)>0)
+    {
+        retorno=1;
+    }
+    else if(strcmp(NombreThisA,NombreThisB)<0)
+    {
+        retorno=-1;
+    }
+
+    return retorno;
+}
+
 

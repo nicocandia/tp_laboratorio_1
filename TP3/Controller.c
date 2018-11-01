@@ -20,7 +20,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
     int retorno=-1;
     FILE* pArchivo;
     pArchivo=fopen(path,"r");
-    if(!parser_EmployeeFromText(pArchivo,pArrayListEmployee))
+    if(pArchivo!=NULL &&!parser_EmployeeFromText(pArchivo,pArrayListEmployee))
     {
         retorno=0;
     }
@@ -40,7 +40,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
     int retorno=-1;
     FILE* pArchivo;
     pArchivo=fopen(path,"rb");
-    if(!parser_EmployeeFromBinary(pArchivo,pArrayListEmployee))
+    if(pArchivo!=NULL && !parser_EmployeeFromBinary(pArchivo,pArrayListEmployee))
     {
         retorno=0;
     }
@@ -216,39 +216,13 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
+    int opcion=0;
     int retorno=-1;
-    int i;
-    int len=ll_len(pArrayListEmployee);
-    int flagSwap;
-    Employee*pEmployeeAuxiliarUno;
-    Employee*pEmployeeAuxiliarDos;
-    char nombreAuxiliarUno[128];
-    char nombreAuxiliarDos[128];
-
-    do
+    if(!utn_getInt(&opcion,"\nIngrese 1 para ordenar por nombre ascendente\n\nIngrese -1 para ordenar por nombre descendente\n","\nerror,opcion invalida\n",-1,1,3)&& opcion!=0)
         {
-            flagSwap=0;
-            if(pArrayListEmployee!=NULL)
-            {
-                for(i=0;i<len-1;i++)
-                {
-                    pEmployeeAuxiliarUno=(Employee*)ll_get(pArrayListEmployee,i);
-                    Employee_getNombre(pEmployeeAuxiliarUno,nombreAuxiliarUno);
-
-                    pEmployeeAuxiliarDos=(Employee*)ll_get(pArrayListEmployee,i+1);
-                    Employee_getNombre(pEmployeeAuxiliarDos,nombreAuxiliarDos);
-
-                    if(strcmp(nombreAuxiliarUno,nombreAuxiliarDos)>0)
-                    {
-                        ll_set(pArrayListEmployee,i+1,pEmployeeAuxiliarUno);
-                        ll_set(pArrayListEmployee,i,pEmployeeAuxiliarDos);
-
-                        flagSwap=1;
-                        retorno=0;
-                    }
-            }
-            }
-        }while(flagSwap);
+            ll_sort(pArrayListEmployee,employee_Compare,opcion);
+            retorno=0;
+        }
     return retorno;
 }
 
@@ -311,6 +285,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
         {
             pEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
             fwrite(pEmpleado,sizeof(Employee),1,parchivo);
+            retorno=0;
         }
     }
     fclose(parchivo);
