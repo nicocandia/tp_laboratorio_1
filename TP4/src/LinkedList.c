@@ -161,15 +161,24 @@ int ll_add(LinkedList* this, void* pElement)
     if(this!=NULL && pElement!=NULL)
         {
             if(this->size==0)
-                {
-                    test_addNode(this,indice,pElement);
-                    returnAux=0;
-                }
+            {
+                test_addNode(this,indice,pElement);
+                returnAux=0;
+                this->size++;
+            }
             else
+            {
+                nodeAuxiliar=test_getNode(this,indice);
+                while(nodeAuxiliar->pNextNode!=NULL)
                 {
-
+                    nodeAuxiliar=nodeAuxiliar->pNextNode;
+                    indice++;
                 }
 
+                    test_addNode(this,indice+1,pElement);
+                    this->size++;
+                    returnAux=0;
+            }
         }
     return returnAux;
 }
@@ -185,6 +194,23 @@ int ll_add(LinkedList* this, void* pElement)
 void* ll_get(LinkedList* this, int index)
 {
     void* returnAux = NULL;
+    int len=ll_len(this);
+    int indiceRecorrido;
+    Node*nodoAuxiliar=NULL;
+
+
+    if(this!=NULL && index>=0 && index<len)
+        {
+            for(indiceRecorrido=0;indiceRecorrido<len;indiceRecorrido++)
+                {
+                    if(indiceRecorrido==index)
+                        {
+                            nodoAuxiliar=test_getNode(this,index);
+                            returnAux=nodoAuxiliar->pElement;
+                            break;
+                        }
+                }
+        }
 
     return returnAux;
 }
