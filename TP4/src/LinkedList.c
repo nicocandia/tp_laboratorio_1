@@ -195,23 +195,23 @@ void* ll_get(LinkedList* this, int index)
 {
     void* returnAux = NULL;
     int len=ll_len(this);
-    int indiceRecorrido;
     Node*nodoAuxiliar=NULL;
-
+    int contador=0;
 
     if(this!=NULL && index>=0 && index<len)
         {
-            for(indiceRecorrido=0;indiceRecorrido<len;indiceRecorrido++)
+                do
                 {
-                    if(indiceRecorrido==index)
-                        {
-                            nodoAuxiliar=test_getNode(this,index);
-                            returnAux=nodoAuxiliar->pElement;
-                            break;
-                        }
+                    nodoAuxiliar=getNode(this,contador);
+                    if(contador==index)
+                    {
+                        returnAux=nodoAuxiliar->pElement;
+                        break;
+                    }
+                        contador++;
                 }
+                while(nodoAuxiliar->pNextNode!=NULL);
         }
-
     return returnAux;
 }
 
