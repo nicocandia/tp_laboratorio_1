@@ -56,14 +56,14 @@ static Node* getNode(LinkedList* this, int nodeIndex)
 {
     Node* pNode = NULL;
     int indiceNodoActual=0;
-    pNode=this->pFirstNode;
     int len=ll_len(this);
 
     if(this!=NULL && (nodeIndex>=0 && nodeIndex<len))
         {
+            pNode=this->pFirstNode;
             while(indiceNodoActual<len)
                 {
-                  if(indiceNodoActual==nodeIndex)
+                    if(indiceNodoActual==nodeIndex)
                     {
                         break;
                     }
@@ -103,6 +103,29 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
     int returnAux = -1;
+    int len=ll_len(this);
+    Node* nuevoNodo=(Node*)malloc(sizeof(Node));
+    nuevoNodo->pElement=pElement;
+    Node* nodoAuxiliar=NULL;
+
+    if(this!=NULL && nodeIndex>=0 && nodeIndex<=len && nuevoNodo!=NULL)
+        {
+            if(nodeIndex==0)
+                {
+                    nuevoNodo->pNextNode=this->pFirstNode;
+                    this->pFirstNode=nuevoNodo;
+                    this->size++;
+                    returnAux=0;
+                }
+                else
+                    {
+                        nodoAuxiliar=test_getNode(this,nodeIndex-1);
+                        nuevoNodo->pNextNode=nodoAuxiliar->pNextNode;
+                        nodoAuxiliar->pNextNode=nuevoNodo;
+                        this->size++;
+                        returnAux=0;
+                    }
+        }
 
     return returnAux;
 }
@@ -133,7 +156,21 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
+    Node* nodeAuxiliar=NULL;
+    int indice=0;
+    if(this!=NULL && pElement!=NULL)
+        {
+            if(this->size==0)
+                {
+                    test_addNode(this,indice,pElement);
+                    returnAux=0;
+                }
+            else
+                {
 
+                }
+
+        }
     return returnAux;
 }
 
