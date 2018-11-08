@@ -158,7 +158,7 @@ int ll_add(LinkedList* this, void* pElement)
     int returnAux = -1;
     Node* nodeAuxiliar=NULL;
     int indice=0;
-    if(this!=NULL && pElement!=NULL)
+    if(this!=NULL && pElement!=NULL )
         {
             if(this->size==0)
             {
@@ -166,7 +166,7 @@ int ll_add(LinkedList* this, void* pElement)
                 returnAux=0;
                 this->size++;
             }
-            else
+            else if((this->size)>0)
             {
                 nodeAuxiliar=test_getNode(this,indice);
                 while(nodeAuxiliar->pNextNode!=NULL)
@@ -178,6 +178,10 @@ int ll_add(LinkedList* this, void* pElement)
                     test_addNode(this,indice+1,pElement);
                     this->size++;
                     returnAux=0;
+            }
+            else
+            {
+                returnAux=-1;
             }
         }
     return returnAux;
@@ -202,13 +206,15 @@ void* ll_get(LinkedList* this, int index)
         {
                 do
                 {
-                    nodoAuxiliar=getNode(this,contador);
+                    nodoAuxiliar=test_getNode(this,contador);
+                    nodoAuxiliar->pNextNode=test_getNode(this,contador);
                     if(contador==index)
                     {
                         returnAux=nodoAuxiliar->pElement;
                         break;
                     }
-                        contador++;
+                    contador++;
+
                 }
                 while(nodoAuxiliar->pNextNode!=NULL);
         }
@@ -228,7 +234,27 @@ void* ll_get(LinkedList* this, int index)
 int ll_set(LinkedList* this, int index,void* pElement)
 {
     int returnAux = -1;
+    int len=ll_len(this);
+    Node*nodoAuxiliar=NULL;
+    int contador=0;
 
+    if(this!=NULL && index>=0 && index<len && pElement!=NULL)
+    {
+        do
+        {
+
+                nodoAuxiliar=test_getNode(this,contador);
+                nodoAuxiliar->pNextNode=test_getNode(this,contador);
+            if(contador==index)
+            {
+                nodoAuxiliar->pElement=pElement;
+                returnAux=0;
+                break;
+            }
+                contador++;
+
+        }while(nodoAuxiliar->pNextNode!=NULL);
+    }
     return returnAux;
 }
 
