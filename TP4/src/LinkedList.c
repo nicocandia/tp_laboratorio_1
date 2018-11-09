@@ -478,11 +478,18 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = ll_newLinkedList();
     void*pElement;
-    int indice=0;
+    int i;
 
-    if(this!=NULL && from>=0 && from<(this->size) && to>from && to<(this->size) && cloneArray!=NULL)
+    if(this!=NULL && from>=0 && from<(this->size) && to>from && to<(this->size))
         {
-
+            for(i=0;i<this->size;i++)
+                {
+                    if(i>=from && i<to)
+                    {
+                        pElement=ll_get(this,i);
+                        ll_add(cloneArray,pElement);
+                    }
+                }
 
         }
         else
