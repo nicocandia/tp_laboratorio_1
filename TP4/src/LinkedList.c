@@ -520,24 +520,13 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 */
 LinkedList* ll_clone(LinkedList* this)
 {
-    LinkedList* cloneArray = ll_newLinkedList();
-    int indice;
+    LinkedList* cloneArray = NULL;
     int len=ll_len(this);
-    void*pElement;
 
-    if(this!=NULL && cloneArray!=NULL)
+    if(this!=NULL)
     {
-        for(indice=0; indice<len; indice++)
-        {
-            pElement=ll_get(this,indice);
-            ll_add(cloneArray,pElement);
-        }
+        cloneArray=ll_subList(this,0,len);
     }
-    else
-    {
-        cloneArray=NULL;
-    }
-
     return cloneArray;
 }
 
