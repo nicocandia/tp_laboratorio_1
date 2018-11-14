@@ -543,43 +543,31 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
     int returnAux =-1;
     int flagOrdenar = 1;
     int i;
-    int error = 0;
     void*pElementAuxiliar;
+    void*pElementI;
+    void*pElementImasUno;
     int len=ll_len(this);
-    if(this!=NULL && len > 1 && (order == 0 || order == 1))
+    if(this!=NULL && pFunc!=NULL && (order == 0 || order == 1))
     {
-
         while(flagOrdenar==1)
         {
             flagOrdenar=0;
             for(i=0; i<len-1; i++)
             {
-                void* eleUno = ll_get(this,i);
-                void* eleDos = ll_get(this,i+1);
-                if (eleUno!=NULL && eleDos!= NULL)
+                pElementI=ll_get(this,i);
+                pElementImasUno=ll_get(this,i+1);
+                if((order==1 && pFunc(pElementI,pElementImasUno)>0) || (order==0 && pFunc(pElementI,pElementImasUno)<0))
                 {
-                    if((order==1 && pFunc(eleUno,eleDos)==1) || (order==0 && pFunc(eleUno,eleDos)==-1))
-                    {
-                        pElementAuxiliar=eleUno;
-                        ll_set(this,i,eleDos);
-                        ll_set(this,i+1,pElementAuxiliar);
-                        flagOrdenar=1;
-                        returnAux=0;
-                    }
-                }
-                else
-                {
-                    returnAux =-1;
-                    error = 1;
-                    break;
+                    pElementAuxiliar=pElementI;
+                    ll_set(this,i,pElementImasUno);
+                    ll_set(this,i+1,pElementAuxiliar);
+                    flagOrdenar=1;
+                    returnAux=0;
                 }
             }
-            if (error == 1)
-            {
-                break;
-            }
+
         }
-        returnAux=0;
+
     }
 
     return returnAux;
