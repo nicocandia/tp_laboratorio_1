@@ -615,3 +615,4 @@ int ll_map(LinkedList* this, void (*pFunc)(void*))
 
  return retorno;
 }
+
